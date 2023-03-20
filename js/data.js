@@ -1,4 +1,4 @@
-import { checkStringLength, getRandomPositiveInteger, getRandomArrayElement } from "./util.js";
+import { getRandomPositiveInteger, getRandomArrayElement } from "./util.js";
 
 const PHOTO_COUNT = 25;
 
