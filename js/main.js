@@ -1,3 +1,3 @@
-import { createPhotoDescription, PHOTO_COUNT } from './data.js';
+import { photoDescription } from './data.js';
 
-const photoDescription = () => Array.from({length: PHOTO_COUNT}, createPhotoDescription);
+photoDescription();
