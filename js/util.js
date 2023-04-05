@@ -1,3 +1,8 @@
+const getId = (() => {
+  let id = 1;
+  return () => id++;
+})();
+
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
@@ -7,4 +12,4 @@ const getRandomPositiveInteger = (a, b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-export {getRandomPositiveInteger, getRandomArrayElement};
+export {getId, getRandomPositiveInteger, getRandomArrayElement};

@@ -1,8 +1,6 @@
-import { getRandomPositiveInteger, getRandomArrayElement } from "./util.js";
+import { getId, getRandomPositiveInteger, getRandomArrayElement } from './util.js';
 
 const PHOTO_COUNT = 25;
-
-const COMMENTS_ID = [];
 
 const NAMES = [
   'Вачик',
@@ -21,19 +19,6 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const getId = (() => {
-  let id = 1;
-  return () => id++;
-})();
-
-const getCommentId = () => {
-  let id = getRandomPositiveInteger(1, 100);
-  while (COMMENTS_ID.includes(id)) {
-    id = getRandomPositiveInteger(1, 100);
-  }
-  return id;
-};
-
 const generateMessage = () => {
   const messages = [];
   for (let i = 0; i < getRandomPositiveInteger(1, 2); i++) {
@@ -43,10 +28,9 @@ const generateMessage = () => {
 };
 
 const createComment = () => {
-  const commentId = getCommentId();
   const messages = generateMessage();
   return {
-    id: commentId,
+    id: getId(),
     avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
     message: messages.join(' '),
     name: getRandomArrayElement(NAMES),
@@ -64,4 +48,6 @@ const createPhotoDescription = () => {
   };
 };
 
-export {createPhotoDescription, PHOTO_COUNT};
+const photoDescription = () => Array.from({length: PHOTO_COUNT}, createPhotoDescription);
+
+export {photoDescription};
