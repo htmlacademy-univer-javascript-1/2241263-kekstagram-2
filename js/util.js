@@ -3,6 +3,12 @@ const getId = (() => {
   return () => id++;
 })();
 
+const getPhotoId = () => {
+  for (let i = 1; i <= 25; i++) {
+    return i;
+  }
+};
+
 const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
@@ -12,4 +18,6 @@ const getRandomPositiveInteger = (a, b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-export {getId, getRandomPositiveInteger, getRandomArrayElement};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getId, getPhotoId, getRandomPositiveInteger, getRandomArrayElement, isEscapeKey};
