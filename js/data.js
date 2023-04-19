@@ -54,10 +54,10 @@ const createPhotoDescription = () => {
     url: `photos/${photoId}.jpg`,
     description: `Описание ${photoId}`,
     likes: getRandomPositiveInteger(15, 200),
-    comment: Array.from({length: getRandomPositiveInteger(1, 5)}, createComment),
+    comments: Array.from({length: getRandomPositiveInteger(1, 5)}, createComment),
   };
 };
 
 const photoDescription = () => Array.from({length: PHOTO_COUNT}, createPhotoDescription);
 
-export {photoDescription};
+export { createPhotoDescription, photoDescription };
