@@ -23,7 +23,8 @@ const MESSAGES = [
 
 const generateMessage = () => {
   const messages = [];
-  for (let i = 0; i < getRandomPositiveInteger(1, 2); i++) {
+  const messageCount = getRandomPositiveInteger(1, 2);
+  for (let i = 0; i < messageCount; i++) {
     messages.push(getRandomArrayElement(MESSAGES));
   }
   return messages;
@@ -40,24 +41,25 @@ const getPhotoId = () => {
 const createComment = () => {
   const messages = generateMessage();
   return {
-    id: getId(),
+    id: getPhotoId(),
     avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
     message: messages.join(' '),
     name: getRandomArrayElement(NAMES),
   };
 };
 
-const createPhotoDescription = () => {
-  const photoId = getPhotoId();
-  return {
-    id: photoId,
-    url: `photos/${photoId}.jpg`,
-    description: `Описание ${photoId}`,
-    likes: getRandomPositiveInteger(15, 200),
-    comments: Array.from({length: getRandomPositiveInteger(1, 5)}, createComment),
-  };
-};
+const publicationId = getId();
+const photoId = getId();
+const descriptionId = getId();
 
-const photoDescription = () => Array.from({length: PHOTO_COUNT}, createPhotoDescription);
+const createPhotoDescription = () => ({
+  id: publicationId(),
+  url: `photos/${photoId()}.jpg`,
+  description: `Описание ${descriptionId()}`,
+  likes: getRandomPositiveInteger(15, 200),
+  comments: Array.from({length: getRandomPositiveInteger(1, 5)}, createComment),
+});
 
-export { createPhotoDescription, photoDescription };
+const generatePhotoDescription = () => Array.from({length: PHOTO_COUNT}, createPhotoDescription);
+
+export { createPhotoDescription, generatePhotoDescription };

@@ -1,10 +1,10 @@
-import { photoDescription } from './data.js';
+import { generatePhotoDescription } from './data.js';
 import { showBigPhoto } from './showFullPicture.js';
 
 const pictureList = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture');
 
-const description = photoDescription();
+const description = generatePhotoDescription();
 
 const addPicture = () => {
   const pictureFragment = document.createDocumentFragment();
