@@ -3,6 +3,7 @@ import { isEscapeKey } from './util.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const closeButton = bigPicture.querySelector('#picture-cancel');
+const commentsList = document.querySelector('.social__comments');
 
 const AVATAR_IMAGE_SIZE = 35;
 
@@ -35,48 +36,9 @@ const createComments = ({avatar, name, message}) => {
   return commentItem;
 };
 
-// const generateBigPicture = () => {
-//   photoOptions.forEach(({url, likes, comments, description}) => {
-//     bigPicture.querySelector('.big-picture__img img').src = url;
-//     bigPicture.querySelector('.likes-count').textContent = likes;
-//     bigPicture.querySelector('.comments-count').textContent = comments.length;
-
-//     const commentFragment = document.createDocumentFragment();
-
-//     comments.forEach(({avatar, message, name}) => {
-//       const commentItem = document.createElement('li');
-//       commentItem.classList.add('social__comment');
-
-//       const commentImage = document.createElement('img');
-//       commentImage.classList.add('social__picture');
-//       commentImage.src = avatar;
-//       commentImage.alt = name;
-//       commentImage.width = AVATAR_IMAGE_SIZE;
-//       commentImage.height = AVATAR_IMAGE_SIZE;
-
-//       const commentText = document.createElement('p');
-//       commentText.classList.add('social__text');
-//       commentText.textContent = message;
-
-//       commentItem.appendChild(commentImage);
-//       commentItem.appendChild(commentText);
-
-//       commentFragment.appendChild(commentItem);
-//       console.log(commentFragment);
-//     });
-//     bigPicture.querySelector('.social__comments').replaceChildren(commentFragment);
-//     bigPicture.querySelector('.social__caption').textContent = description;
-//   });
-// };
-
-// const openBigPicture = (picture) => {
-//   generateBigPicture(picture);
-//   bigPicture.querySelector('.social__comment-count').classList.add('hidden');
-//   bigPicture.querySelector('.comments-loader').classList.add('hidden');
-//   document.body.classList.add('modal-open');
-//   bigPicture.classList.remove('hidden');
-//   document.addEventListener('keydown', onPopupEscKeydown);
-// };
+const clearCommentsList = () => {
+  commentsList.innerHTML = '';
+};
 
 const onBigPictureEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -136,6 +98,7 @@ const closeBigPicture = () => {
   closeButton.removeEventListener('click', cancelBigPhoto);
 
   bigPicture.value = null;
+  clearCommentsList();
 };
 
 bigPicture.addEventListener('change', changeToBigPicture);
@@ -143,15 +106,5 @@ bigPicture.addEventListener('change', changeToBigPicture);
 const escapePressed = (evt) => evt.key === 'Escape' && closeBigPicture();
 document.addEventListener('keydown',(evt) => escapePressed(evt));
 closeButton.addEventListener('click', closeBigPicture);
-
-// closeButton.addEventListener('click', () => {
-//   closeBigPicture();
-// });
-
-// closeButton.addEventListener('keydown', (evt) => {
-//   if (isEscapeKey(evt)) {
-//     closeBigPicture();
-//   }
-// });
 
 export { showBigPhoto };
