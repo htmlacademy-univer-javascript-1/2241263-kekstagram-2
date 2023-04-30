@@ -1,4 +1,4 @@
-import { createPhotoDescription } from './data.js';
+// import { createPhotoDescription } from './data.js';
 import { isEscapeKey } from './util.js';
 
 const bigPicture = document.querySelector('.big-picture');
@@ -59,6 +59,7 @@ const createBigPicture = ({url, likes, description, comments}) => {
 
   bigPicture.querySelector('.social__comments').replaceChildren(commentFragment);
   bigPicture.querySelector('.social__caption').textContent = description;
+  showBigPhoto();
 };
 
 const changeToBigPicture = (evt) => {
@@ -72,7 +73,7 @@ const showBigPhoto = () => {
     return;
   }
 
-  createBigPicture(createPhotoDescription());
+  // createBigPicture(createPhotoDescription());
 
   bigPicture.querySelector('.social__comment-count').classList.add('hidden');
   bigPicture.querySelector('.comments-loader').classList.add('hidden');
@@ -107,4 +108,4 @@ const escapePressed = (evt) => evt.key === 'Escape' && closeBigPicture();
 document.addEventListener('keydown',(evt) => escapePressed(evt));
 closeButton.addEventListener('click', closeBigPicture);
 
-export { showBigPhoto };
+export { showBigPhoto, createBigPicture };
