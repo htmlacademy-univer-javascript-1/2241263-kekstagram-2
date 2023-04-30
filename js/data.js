@@ -1,6 +1,4 @@
-import { getId, getRandomPositiveInteger, getRandomArrayElement } from './util.js';
-
-const PHOTO_COUNT = 25;
+import { getId, getRandomPositiveInteger, getRandomUniqNumber, getRandomArrayElement } from './util.js';
 
 const NAMES = [
   'Вачик',
@@ -9,8 +7,6 @@ const NAMES = [
   'Вова',
   'Саша'
 ];
-
-const PHOTOS_ID = [];
 
 const MESSAGES = [
   'Всё отлично!',
@@ -30,36 +26,28 @@ const generateMessage = () => {
   return messages;
 };
 
-const getPhotoId = () => {
-  const id = getRandomPositiveInteger(1, 25);
-  while (!PHOTOS_ID.includes(id)) {
-    PHOTOS_ID.push(id);
-  }
-  return id;
-};
-
 const createComment = () => {
   const messages = generateMessage();
   return {
-    id: getPhotoId(),
+    id: getRandomUniqNumber(),
     avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
     message: messages.join(' '),
     name: getRandomArrayElement(NAMES),
   };
 };
 
-const publicationId = getId();
-const photoId = getId();
+const publicationId = getRandomUniqNumber(1, 25);
+const photoId = getRandomUniqNumber(1, 25);
 const descriptionId = getId();
 
-const createPhotoDescription = () => ({
-  id: publicationId(),
-  url: `photos/${photoId()}.jpg`,
-  description: `Описание ${descriptionId()}`,
-  likes: getRandomPositiveInteger(15, 200),
-  comments: Array.from({length: getRandomPositiveInteger(1, 5)}, createComment),
-});
+const createPhotoDescription = function() {
+  return {
+    id: publicationId(),
+    url: `photos/${photoId()}.jpg`,
+    description: `Описание ${descriptionId()}`,
+    likes: getRandomPositiveInteger(15, 200),
+    comments: Array.from({length: getRandomPositiveInteger(1, 5)}, createComment),
+  };
+};
 
-const generatePhotoDescription = () => Array.from({length: PHOTO_COUNT}, createPhotoDescription);
-
-export { createPhotoDescription, generatePhotoDescription };
+export { createPhotoDescription };
