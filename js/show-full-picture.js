@@ -1,4 +1,3 @@
-// import { createPhotoDescription } from './data.js';
 import { isEscapeKey } from './util.js';
 
 const bigPicture = document.querySelector('.big-picture');
@@ -72,8 +71,6 @@ const showBigPhoto = () => {
   if (document.body.classList.contains('modal-open')) {
     return;
   }
-
-  // createBigPicture(createPhotoDescription());
 
   bigPicture.querySelector('.social__comment-count').classList.add('hidden');
   bigPicture.querySelector('.comments-loader').classList.add('hidden');

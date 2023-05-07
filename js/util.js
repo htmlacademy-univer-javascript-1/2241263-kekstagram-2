@@ -32,4 +32,11 @@ const checkStringLenght = (str, maxLenght) => str.length <= maxLenght;
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export { getId, getRandomPositiveInteger, getRandomUniqNumber, getRandomArrayElement, checkStringLenght, isEscapeKey };
+export {
+  getId,
+  getRandomPositiveInteger,
+  getRandomUniqNumber,
+  getRandomArrayElement,
+  checkStringLenght,
+  isEscapeKey,
+};

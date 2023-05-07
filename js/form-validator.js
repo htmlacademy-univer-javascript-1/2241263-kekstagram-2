@@ -2,7 +2,7 @@ import { checkStringLenght } from './util.js';
 
 const pictureForm = document.querySelector('#upload-select-image');
 const hashtagInput = pictureForm.querySelector('.text__hashtags');
-const commentInput = pictureForm.querySelector('.text__description');
+const commentTextarea = pictureForm.querySelector('.text__description');
 
 const MAX_HASH_TAGS_COUNT = 5;
 const MAX_COMMENT_LENGTH = 140;
@@ -21,7 +21,7 @@ function validateHashTags(hashTagString) {
     return true;
   }
 
-  const regex = /^#[a-zA-Z0-9]{1,19}$/;
+  const regex = /^((#[A-Za-zА-Яа-яЁё0-9]{1,19})\s*|)+$$/;
 
   const hashTags = hashTagString.trim().split(/\s+/);
 
@@ -47,16 +47,16 @@ function validateHashTags(hashTagString) {
   return true;
 }
 
-const validateComment = (comment) => checkStringLenght(comment, MAX_COMMENT_LENGTH);
+const validateComment = () => checkStringLenght(commentTextarea.value, MAX_COMMENT_LENGTH);
 
 pristine.addValidator(
   hashtagInput,
   validateHashTags,
-  'Максимальное допустимое кол-во хэш-тегов: 5. После знака # допустимы только буквы и цифры'
+  'Максимальное допустимое кол-во хэш-тегов: 5. Недопустимы одинаковые хэш-теги и спецсимволы.'
 );
 
 pristine.addValidator(
-  commentInput,
+  commentTextarea,
   validateComment,
   'Максимальное количество символов: 140'
 );

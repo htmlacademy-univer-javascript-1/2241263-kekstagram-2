@@ -1,4 +1,7 @@
+import './form-validator.js';
 import { isEscapeKey } from './util.js';
+import { addScale, resetScale } from './scale.js';
+import { filterEditor } from './filters.js';
 
 const form = document.querySelector('#upload-select-image');
 const uploadPhotoInput = document.querySelector('#upload-file');
@@ -28,6 +31,9 @@ const openUploadOverlay = () => {
   uploadPhotoOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
+  addScale();
+  filterEditor();
+
   document.addEventListener('keydown', onUploadPhotoEscKeydown);
   uploadCancelBtn.addEventListener('click', onUploadCancelBtnClick);
   hashtagInput.addEventListener('keydown', (evt) => evt.stopPropagation());
@@ -37,6 +43,8 @@ const openUploadOverlay = () => {
 const closeUploadOverlay = () => {
   uploadPhotoOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
+
+  resetScale();
 
   document.removeEventListener('keydown', onUploadPhotoEscKeydown);
   uploadCancelBtn.removeEventListener('click', onUploadCancelBtnClick);
