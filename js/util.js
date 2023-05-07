@@ -13,10 +13,30 @@ const getRandomPositiveInteger = (a, b) => {
   return Math.floor(result);
 };
 
+const getRandomUniqNumber = function(from, to) {
+  const previousValues = [];
+  return function () {
+    let currentValue = getRandomPositiveInteger(from, to);
+
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomPositiveInteger(from, to);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+};
+
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
 const checkStringLenght = (str, maxLenght) => str.length <= maxLenght;
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export { getId, getRandomPositiveInteger, getRandomArrayElement, checkStringLenght, isEscapeKey };
+export {
+  getId,
+  getRandomPositiveInteger,
+  getRandomUniqNumber,
+  getRandomArrayElement,
+  checkStringLenght,
+  isEscapeKey,
+};
