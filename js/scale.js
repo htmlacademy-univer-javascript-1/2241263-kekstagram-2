@@ -12,7 +12,7 @@ const previewPhoto = document.querySelector('.img-upload__preview');
 
 const setScale = (value) => (previewPhoto.style.transform = `scale(${value / 100})`);
 
-const handleSmallerScale = () => {
+const smallerScalehandler = () => {
   if (photoScaleValue - SCALE_STEP <= SCALE_MIN) {
     photoScaleValue = SCALE_MIN;
     scaleValue.value = `${photoScaleValue}%`;
@@ -25,7 +25,7 @@ const handleSmallerScale = () => {
   setScale(photoScaleValue);
 };
 
-const handleBiggerScale = () => {
+const biggerScaleHandler = () => {
   if (photoScaleValue + SCALE_STEP >= SCALE_MAX) {
     photoScaleValue = SCALE_MAX;
     scaleValue.value = `${photoScaleValue}%`;
@@ -39,16 +39,16 @@ const handleBiggerScale = () => {
 };
 
 const addScale = () => {
-  scaleSmaller.addEventListener('click', handleSmallerScale);
-  scaleBigger.addEventListener('click', handleBiggerScale);
+  scaleSmaller.addEventListener('click', smallerScalehandler);
+  scaleBigger.addEventListener('click', biggerScaleHandler);
 };
 
 const resetScale = () => {
   photoScaleValue = SCALE_DEFAULT_VALUE;
   scaleValue.value = `${photoScaleValue}%`;
-  scaleSmaller.removeEventListener('click', handleSmallerScale);
-  scaleBigger.removeEventListener('click', handleBiggerScale);
+  scaleSmaller.removeEventListener('click', smallerScalehandler);
+  scaleBigger.removeEventListener('click', biggerScaleHandler);
   setScale(photoScaleValue);
 };
 
-export { addScale, resetScale };
+export { addScale, resetScale, previewPhoto };
