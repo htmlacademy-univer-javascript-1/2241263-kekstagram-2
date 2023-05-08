@@ -1,3 +1,5 @@
+import { sendData } from './api.js';
+import { blockSubmitButton, showErrorForm, showSuccessForm } from './form.js';
 import { checkStringLenght } from './util.js';
 
 const pictureForm = document.querySelector('#upload-select-image');
@@ -62,7 +64,10 @@ pristine.addValidator(
 );
 
 pictureForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
-    evt.preventDefault();
+  if (pristine.validate()) {
+    blockSubmitButton();
+    const form = new FormData(evt.target);
+    sendData(showSuccessForm, showErrorForm, form);
   }
+  evt.preventDefault();
 });

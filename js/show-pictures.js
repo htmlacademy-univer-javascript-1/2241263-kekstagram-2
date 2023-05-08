@@ -5,7 +5,7 @@ const pictureTemplate = document.querySelector('#picture');
 
 const pictureFragment = document.createDocumentFragment();
 
-const addPicture = (descriptions) => {
+const addPictures = (descriptions) => {
   descriptions.forEach((photo) => {
     const photoElement = pictureTemplate.cloneNode(true).content;
     const pictureImage = photoElement.querySelector('.picture__img');
@@ -26,4 +26,4 @@ const addPicture = (descriptions) => {
   pictureList.appendChild(pictureFragment);
 };
 
-export { addPicture };
+export { addPictures };
