@@ -2,6 +2,7 @@ import { createBigPicture } from './show-full-picture.js';
 
 const pictureList = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture');
+const imgFilters = document.querySelector('.img-filters');
 
 const pictureFragment = document.createDocumentFragment();
 
@@ -24,6 +25,7 @@ const addPictures = (descriptions) => {
   });
 
   pictureList.appendChild(pictureFragment);
+  imgFilters.classList.remove('img-filters--inactive');
 };
 
 export { addPictures };

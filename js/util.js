@@ -53,6 +53,36 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+const debounce = (cb, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => cb.apply(this, rest), timeoutDelay);
+  };
+};
+
+const throttle = (cb, delayBetweenFrames) => {
+  let lastTime = 0;
+
+  return (...rest) => {
+    const now = new Date();
+    if (now - lastTime >= delayBetweenFrames) {
+      cb.apply(this, rest);
+      lastTime = now;
+    }
+  };
+};
+
+const shuffle = (array) => {
+  const newArray = Array.from(new Set(array));
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+};
+
 export {
   getId,
   getRandomPositiveInteger,
@@ -61,4 +91,7 @@ export {
   checkStringLenght,
   isEscapeKey,
   showAlert,
+  debounce,
+  throttle,
+  shuffle,
 };
