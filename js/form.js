@@ -3,6 +3,8 @@ import { isEscapeKey } from './util.js';
 import { addScale, resetScale, previewPhoto } from './scale.js';
 import { filterEditor } from './filters.js';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 const form = document.querySelector('#upload-select-image');
 const uploadPhotoInput = document.querySelector('#upload-file');
 const uploadPhotoOverlay = document.querySelector('.img-upload__overlay');
@@ -13,23 +15,6 @@ const commentTextarea = form.querySelector('.text__description');
 const errorTemplate = document.querySelector('#error').content.querySelector('section');
 const successTemplate = document.querySelector('#success').content.querySelector('section');
 const submitButton = document.querySelector('.img-upload__submit');
-
-const onUploadPhotoInputChange = (evt) => {
-  if (evt.target.value) {
-    openUploadOverlay();
-  }
-};
-
-const onUploadPhotoEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeUploadOverlay();
-  }
-};
-
-const onUploadCancelBtnClick = () => {
-  closeUploadOverlay();
-};
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
@@ -92,8 +77,16 @@ const showErrorForm = () => {
 };
 
 const openUploadOverlay = () => {
-  uploadPhotoOverlay.classList.remove('hidden');
-  document.body.classList.add('modal-open');
+  const file = uploadPhotoInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    document.querySelector('.img-upload__preview img').src = URL.createObjectURL(file);
+    uploadPhotoOverlay.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+  }
 
   addScale();
   filterEditor();
@@ -102,6 +95,12 @@ const openUploadOverlay = () => {
   uploadCancelBtn.addEventListener('click', onUploadCancelBtnClick);
   hashtagInput.addEventListener('keydown', (evt) => evt.stopPropagation());
   commentTextarea.addEventListener('keydown', (evt) => evt.stopPropagation());
+};
+
+const onUploadPhotoInputChange = (evt) => {
+  if (evt.target.value) {
+    openUploadOverlay();
+  }
 };
 
 const closeUploadOverlay = () => {
@@ -125,6 +124,18 @@ const closeUploadOverlay = () => {
   uploadPhotoInput.value = null;
 };
 
+const onUploadPhotoEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeUploadOverlay();
+  }
+};
+
+const onUploadCancelBtnClick = () => {
+  closeUploadOverlay();
+};
+
 uploadPhotoInput.addEventListener('change', onUploadPhotoInputChange);
+
 
 export { openUploadOverlay, blockSubmitButton, showSuccessForm, showErrorForm };

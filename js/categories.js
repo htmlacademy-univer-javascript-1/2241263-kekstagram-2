@@ -3,9 +3,9 @@ import { shuffle } from './util.js';
 
 const MAX_RANDOM_PHOTO_COUNT = 10;
 
-const defaultFilterButton = document.getElementById('filter-default');
-const randomFilterButton = document.getElementById('filter-random');
-const discussedFilterButton = document.getElementById('filter-discussed');
+const defaultFilterButton = document.querySelector('#filter-default');
+const randomFilterButton = document.querySelector('#filter-random');
+const discussedFilterButton = document.querySelector('#filter-discussed');
 const active = 'img-filters__button--active';
 
 const clearPictures = () => {
